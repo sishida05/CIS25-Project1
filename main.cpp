@@ -13,18 +13,18 @@ int main() {
     cout << joinWords(testWords, 1, 3) << endl;  // Should print: cat sat down
 
     // // Creating a file for the text
-    // ofstream testFile("test.txt");
-    // testFile << "This is a test file that must contain words!" << endl;
-    // testFile << "This is another line of words that are in this file!" << endl;
-    // testFile.close();
+    ofstream testFile("test.txt");
+    testFile << "This is a test file that must contain words!" << endl;
+    testFile << "This is another line of words that are in this file!" << endl;
+    testFile.close();
 
-    // // Reading words from the file
-    // string words[1000];
-    // int count = readWordsFromFile("test.txt", words, 1000);
-    // cout << "Read " << count << " words" << endl;
-    // for (int i = 0; i < 10 && i < count; i++) {
-    // cout << words[i] << endl;
-    // }
+    // Reading words from the file
+    string words[1000];
+    int count = readWordsFromFile("test.txt", words, 1000);
+    cout << "Read " << count << " words" << endl;
+    for (int i = 0; i < 10 && i < count; i++) {
+    cout << words[i] << endl;
+    }
 
     // // 
     // string prefixes[10000], suffixes[10000];

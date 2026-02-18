@@ -1,5 +1,6 @@
 #include "markov.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 string joinWords(const string words[], int startIndex, int count) {
@@ -10,7 +11,19 @@ string joinWords(const string words[], int startIndex, int count) {
     return result;
 }
 
-int readWordsFromFile(string filename, string words[], int maxWords);
+int readWordsFromFile(string filename, string words[], int maxWords) {
+    int counter = 0;
+    ifstream test ("test.txt");
+    if (test.is_open()) {
+        while (counter < maxWords && test >> words[counter]) {
+            counter++;
+        }
+    } else {
+        return -1;
+    }
+    test.close();
+    return counter;
+}
 
 int buildMarkovChain(const string words[], int numWords, int order,
                      string prefixes[], string suffixes[],
