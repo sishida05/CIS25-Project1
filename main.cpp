@@ -14,7 +14,7 @@ int main() {
 
     // // Creating a file for the text
     ofstream testFile("test.txt");
-    testFile << "This is a test file that must contain words!" << endl;
+    testFile << "This is the test file that must contain words!" << endl;
     testFile << "This is another line of words that are in this file!" << endl;
     testFile.close();
 
@@ -32,6 +32,12 @@ int main() {
     for (int i = 0; i < 20 && i < chainSize; i++) {
     cout << "[" << prefixes[i] << "] -> [" << suffixes[i] << "]" << endl;
     }
+
+    // 
+    for (int i = 0; i < 10; i++) {
+    cout << getRandomSuffix(prefixes, suffixes, chainSize, "the") << endl;
+}
+
 
     return 0;
 }
