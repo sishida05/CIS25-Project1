@@ -26,12 +26,12 @@ int main() {
     cout << words[i] << endl;
     }
 
-    // // 
-    // string prefixes[10000], suffixes[10000];
-    // int chainSize = buildMarkovChain(words, count, 1, prefixes, suffixes, 10000);
-    // for (int i = 0; i < 20 && i < chainSize; i++) {
-    // cout << "[" << prefixes[i] << "] -> [" << suffixes[i] << "]" << endl;
-    // }
+    // 
+    string prefixes[10000], suffixes[10000];
+    int chainSize = buildMarkovChain(words, count, 1, prefixes, suffixes, 10000);
+    for (int i = 0; i < 20 && i < chainSize; i++) {
+    cout << "[" << prefixes[i] << "] -> [" << suffixes[i] << "]" << endl;
+    }
 
     return 0;
 }

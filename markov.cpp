@@ -25,9 +25,20 @@ int readWordsFromFile(string filename, string words[], int maxWords) {
     return counter;
 }
 
-int buildMarkovChain(const string words[], int numWords, int order,
-                     string prefixes[], string suffixes[],
-                     int maxChainSize);
+int buildMarkovChain(const string words[], int numWords, int order, string prefixes[], string suffixes[], int maxChainSize) {
+    int count = 0;
+    for (int i = 0; i < numWords - order - 1; i++) {
+        string prefix = joinWords(words, i, order);
+        string suffix = words[i + order];
+        prefixes[count] = prefix;
+        suffixes[count] = suffix;
+        count++;
+        if (count == maxChainSize) {
+            break;
+        }
+    }
+    return count;
+}
 
 string getRandomSuffix(const string prefixes[], const string suffixes[],
                             int chainSize, string currentPrefix);
