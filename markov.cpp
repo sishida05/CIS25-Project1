@@ -69,5 +69,20 @@ string getRandomPrefix(const string prefixes[], int chainSize) {
 
 }
 
-string generateText(const string prefixes[], const string suffixes[],
-                         int chainSize, int order, int numWords);
+string generateText(const string prefixes, const string suffixes,int chainSize, int order, int numWords) {
+    string currentPrefix = getRandomPrefix(prefixes, chainSize);
+    string result = currentPrefix;
+    string pastWords[numWords];
+    string newWord;
+    for (int i = 0; i <= numWords-1; i++) {
+        getRandomSuffix(prefixes, suffixes, chainSize, currentPrefix);
+        if (getRandomSuffix(prefixes, suffixes, chainSize, currentPrefix) == "") {
+            break;
+        }
+        pastWords[i] = currentPrefix;
+        newWord = getRandomSuffix(prefixes, suffixes, chainSize, currentPrefix);
+        result += " " + newWord;
+        currentPrefix = newWord;
+    }
+    return joinWords(pastWords, 0, numWords);
+}

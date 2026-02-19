@@ -43,5 +43,9 @@ int main() {
     cout << getRandomPrefix(prefixes, chainSize) << endl;
 }
 
+string output = generateText(prefixes, suffixes, chainSize, 1, 20);
+cout << output << endl;
+
+
     return 0;
 }
