@@ -6,7 +6,7 @@ using namespace std;
 string joinWords(const string words[], int startIndex, int count) {
     string result;
     for (int i = 0; i <= count - 1; i++) {
-        result += " " + words[startIndex + i];
+        result += words[startIndex + i];
     }
     return result;
 }
@@ -41,18 +41,26 @@ int buildMarkovChain(const string words[], int numWords, int order, string prefi
 }
 
 string getRandomSuffix(const string prefixes[], const string suffixes[], int chainSize, string currentPrefix) {
-    int matching 
     int matchCount = 0;
     for (int i = 0; i <= chainSize-1; i++) {
         if (prefixes[i] == currentPrefix) {
             matchCount++;
+            }
         }
-    }
-    if (matchCount == 0) {
+        if (matchCount == 0) {
             return "";
     }
     int pick = rand() % matchCount;
-    return suffixes[pick];
+    int currentMatch = 0;
+    for (int i = 0; i <= chainSize-1; i++) {
+        if (prefixes[i] == currentPrefix) {
+            if (currentMatch == pick) {
+                return suffixes[i];
+            }
+            currentMatch++;
+        }
+    }
+    return "";
 }
 
 string getRandomPrefix(const string prefixes[], int chainSize);
