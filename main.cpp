@@ -3,10 +3,13 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <ctime>
+#include <cstdlib>
 using namespace std;
 
 int main() {
 
+    srand(time(0));
     // 
     string testWords[] = {"the", "cat", "sat", "down"};
     cout << joinWords(testWords, 0, 2) << endl;  // Should print: the cat
