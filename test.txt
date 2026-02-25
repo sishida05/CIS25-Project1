@@ -1,2 +1,0 @@
-This is the test file that must contain words!
-This is another line of words that are in this file!

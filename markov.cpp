@@ -16,15 +16,15 @@ string joinWords(const string words[], int startIndex, int count) {
 
 int readWordsFromFile(string filename, string words[], int maxWords) {
     int counter = 0;
-    ifstream test ("test.txt");
-    if (test.is_open()) {
-        while (counter < maxWords && test >> words[counter]) {
+    ifstream book(filename);
+    if (book.is_open()) {
+        while (counter < maxWords && book >> words[counter]) {
             counter++;
         }
     } else {
         return -1;
     }
-    test.close();
+    book.close();
     return counter;
 }
 
@@ -74,29 +74,32 @@ string getRandomPrefix(const string prefixes[], int chainSize) {
 
 string generateText(const string prefixes[], const string suffixes[],int chainSize, int order, int numWords) {
     string currentPrefix = getRandomPrefix(prefixes, chainSize);
-    string pastWords[numWords];
-    string print[numWords];
-    string newWord, result;
+    string result;
+    string prefixWords[3];
 
-    pastWords[0] = currentPrefix;
+    string temp;
+    
+    // Had to look up how to do this
+    // As far as I know, we have not learned any method to actually accomplish this
+    stringstream ss(currentPrefix);
+    int index = 0;
+    while (ss >> temp && index < order) {
+        prefixWords[index] = temp;
+        index++;
+    }
+
     for (int i = 1; i < numWords - order; i++) {
-        newWord = getRandomSuffix(prefixes, suffixes, chainSize, currentPrefix);
+        string newWord = getRandomSuffix(prefixes, suffixes, chainSize, currentPrefix);
              if (newWord == "") {
             break;
         }
         
-        print[i] = newWord;
         result += newWord + " ";
-
-        if (order == 1) {
-            currentPrefix = newWord;
-        } else if (order == 2) {
-            pastWords[i] = currentPrefix;
-            currentPrefix = pastWords[i] + " " + newWord;
-        } else if (order == 3) {
-            pastWords[i] = currentPrefix;
-            currentPrefix = joinWords(pastWords, i-1, i) + newWord;
+        for (int j = 0; j < order - 1; j++) {
+            prefixWords[j] = prefixWords[j + 1];
         }
+        prefixWords[order - 1] = newWord;
+        currentPrefix = joinWords(prefixWords, 0, order);
     }
     return result;
 }
