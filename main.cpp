@@ -12,13 +12,18 @@ int main() {
     srand(time(0));
     
     string fileName;
-    cout << "Please enter a filename: " << endl;
+    cout << "Please pick one of the following books (Frankenstein, Wuthering Heights, Moby Dick): " << endl;
     cin >> fileName;
-
-    ofstream newFile(fileName);
-    newFile << "This is the test file that must contain words!" << endl;
-    newFile << "This is another line of words that are in this file!" << endl;
-    newFile.close();
+        if (fileName != "Frankenstein") {
+            return 1;
+        } else if (fileName != "Wuthering Heights") {
+            return 1;
+        } else if (fileName != "Moby Dick") {
+            return 1;
+        } else {
+            ofstream book(fileName);
+            book.close();
+        }
 
     int order;
     cout << "Please enter the order (1-3): " << endl;
@@ -28,37 +33,29 @@ int main() {
         }
 
     int wordNum;
-    cout << "Please enter the number of words: " << endl;
+    cout << "Please enter the number of words (1-100,000): " << endl;
     cin >> wordNum;
+        if (wordNum < 1 || wordNum > 100000) {
+            return 1;
+        }
     
-    string words[wordNum], prefixes[10000], suffixes[10000];
+    string words[wordNum], prefixes[100000], suffixes[100000];
     
     // Reading words from the file
-    int count = readWordsFromFile(fileName, words, 1000);
+    int count = readWordsFromFile(fileName, words, 100000);
     cout << "Read " << count << " words" << endl;
-    for (int i = 0; i < 10 && i < count; i++) {
+    for (int i = 0; i < count; i++) {
     cout << words[i] << endl;
     }
 
-    // 
-    
-    int chainSize = buildMarkovChain(words, count, 1, prefixes, suffixes, 10000);
+    // Getting the suffixes and prefixes
+    int chainSize = buildMarkovChain(words, count, order, prefixes, suffixes, 100000);
     for (int i = 0; i < 20 && i < chainSize; i++) {
     cout << "[" << prefixes[i] << "] -> [" << suffixes[i] << "]" << endl;
     }
 
-    // 
-    for (int i = 0; i < 10; i++) {
-    cout << getRandomSuffix(prefixes, suffixes, chainSize, "the") << endl;
-}
-
-    // 
-    for (int i = 0; i < 5; i++) {
-    cout << getRandomPrefix(prefixes, chainSize) << endl;
-}
-
-string output = generateText(prefixes, suffixes, chainSize, 1, 20);
-cout << output << endl;
+    string output = generateText(prefixes, suffixes, chainSize, order, wordNum);
+    cout << output << endl;
 
 
     return 0;
