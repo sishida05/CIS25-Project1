@@ -7,10 +7,10 @@ string joinWords(const string words[], int startIndex, int count) {
     string result;
     for (int i = 0; i <= count - 1; i++) {
         result += words[startIndex + i];
-    //     if (i < count) {
-    //         result += " ";
-    //     }
-    // }
+        if (i < count - 1) {
+            result += " ";
+        }
+    }
     return result;
 }
 
@@ -95,7 +95,7 @@ string generateText(const string prefixes[], const string suffixes[],int chainSi
             currentPrefix = pastWords[i] + " " + newWord;
         } else if (order == 3) {
             pastWords[i] = currentPrefix;
-            currentPrefix = joinWords(pastWords, i-1, i) + " " + newWord;
+            currentPrefix = joinWords(pastWords, i-1, i) + newWord;
         }
     }
     return result;
